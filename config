@@ -53,7 +53,7 @@ bindsym control+Mod1+t exec alacritty
 # kill focused window
 bindsym Mod1+F4 kill
 bindsym control+Mod4+Delete exec xkill
-bindsym Mod1+P exec poweroff
+bindsym Mod1+p exec poweroff
 # start dmenu (a program launcher)
 #bindsym Mod1+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
@@ -163,25 +163,27 @@ bindsym Mod1+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-       # These bindings trigger as soon as you enter the resize mode
+        # These bindings trigger as soon as you enter the resize mode
 
-       # Pressing left will shrink the windows width.
-       # Pressing up will shrink the windows height.
-       bindsym $left       resize shrink width 10 px or 10 ppt
-       bindsym $down       resize grow height 10 px or 10 ppt
-       bindsym $up         resize shrink height 10 px or 10 ppt
-       bindsym $right      resize grow width 10 px or 10 ppt
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym $left       resize shrink width 10 px or 10 ppt
+        bindsym $down       resize grow height 10 px or 10 ppt
+        bindsym $up         resize shrink height 10 px or 10 ppt
+        bindsym $right      resize grow width 10 px or 10 ppt
 
-       # same bindings, but for the arrow keys
-       bindsym Left        resize shrink width 10 px or 10 ppt
-       bindsym Down        resize grow height 10 px or 10 ppt
-       bindsym Up          resize shrink height 10 px or 10 ppt
-       bindsym Right       resize grow width 10 px or 10 ppt
+        # same bindings, but for the arrow keys
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
 
-       # back to normal: Enter or Escape or Mod1+r
-       bindsym Return mode "default"
-       bindsym Escape mode "default"
-       bindsym Mod1+r mode "default"
+        # back to normal: Enter or Escape or Mod1+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym Mod1+r mode "default"
 }
 
 bindsym Mod1+r mode "resize"
@@ -193,7 +195,8 @@ bindsym Mod1+3 exec spotify
 bindsym Mod1+2 exec libreoffice
 bindsym Mod1+F2 exec alacritty -e nmtui
 bindsym Mod1+F3 exec alacritty -e bluetoothctl
-bindsym Print exec scrot
+bindsym Print exec scrot -e 'xclip -selection clipboard -t image/png -i $f'
+bindsym mod1+Print exec scrot '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/'
 bindsym Mod4+Escape exec alacritty -e htop
 bindsym Mod4+F1 exec brave gmail.com
 bindsym Mod4+F2 exec brave drive.google.com
@@ -215,7 +218,7 @@ bindsym button5 exec ~/.i3/scripts/custom_wheel_down
 #Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-       position top
+        position top
 	status_command LC_ALL=C i3status --config /etc/i3status.conf
 }
 #######################################################################
